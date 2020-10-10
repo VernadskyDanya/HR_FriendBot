@@ -31,6 +31,8 @@ def send_welcome(message):
 
     @bot.callback_query_handler(func=lambda call: True)
     def callback_query(call):
+        if (call.data) == "Start":
+            send_welcome(message)
         if (call.data) =="Coffee":
             from functions import Coffee
             Coffee(message.chat.id, bot, types)
@@ -50,11 +52,17 @@ def send_welcome(message):
         if (call.data) == "Perenos":
             from functions import Perenos
             Perenos(message.chat.id, bot, types)
+
         if (call.data) == "Spravka":
-            pass
+            from functions import Spravka
+            Spravka(message.chat.id, bot, types)
+
         if (call.data) == "Bolnichnyi":
-            pass
+            from functions import Bolnichnyi
+            Bolnichnyi(message.chat.id, bot, types)
+
         if (call.data) == "Komandirovka":
-            pass
+            from functions import Komandirovka
+            Komandirovka(message.chat.id, bot, types)
 
 bot.polling(none_stop=False, interval=0, timeout=20)
