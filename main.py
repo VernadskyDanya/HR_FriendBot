@@ -12,12 +12,12 @@ commands = {  # command description used in the "help" command
 def send_welcome(message):
     bot.send_message(message.chat.id, "Привет, " + str(message.from_user.first_name)
                      + ", это твой личный HR друг! Я всегда готов помочь тебе с вопросами")
-    button1 = types.InlineKeyboardButton(text = "1. ☕", callback_data = "1")
-    button2 = types.InlineKeyboardButton(text = "2. ❓", callback_data = "2")
-    button3 = types.InlineKeyboardButton(text = "3. 🕵️‍♂️ ", callback_data = "3")
-    button4 = types.InlineKeyboardButton(text = "4. 📈 ", callback_data = "4")
-    button5 = types.InlineKeyboardButton(text = "5. 📴 ", callback_data = "5")
-    button6 = types.InlineKeyboardButton(text = "6. 📛", callback_data = "6")
+    button1 = types.InlineKeyboardButton(text = "1. ☕", callback_data = "Coffee")
+    button2 = types.InlineKeyboardButton(text = "2. ❓", callback_data = "Personnel administration")
+    button3 = types.InlineKeyboardButton(text = "3. 🕵️‍♂️ ", callback_data = "Study")
+    button4 = types.InlineKeyboardButton(text = "4. 📈 ", callback_data = "Grow")
+    button5 = types.InlineKeyboardButton(text = "5. 📴 ", callback_data = "IT")
+    button6 = types.InlineKeyboardButton(text = "6. 📛", callback_data = "Not found")
     markup = types.InlineKeyboardMarkup()
     markup.add(button1,button2,button3,button4,button5,button6)
     bot.send_message(message.chat.id, "Чем тебе помочь?\n"
@@ -31,30 +31,25 @@ def send_welcome(message):
 
     @bot.callback_query_handler(func=lambda call: True)
     def callback_query(call):
-        options = {
-            '1': "Coffee",
-            '2': "Personnel administration",
-            '3': "Study",
-            '4': "Grow",
-            '5': "IT",
-            '6': "Not found",
-        }
-
-        if options.get(call.data) =="Coffee":
+        if (call.data) =="Coffee":
             button1 = types.InlineKeyboardButton(text="Бот Hot Coffee ☕ ",
                                                  url = "https://t.me/GPN_S_coffee_bot")
             markup = types.InlineKeyboardMarkup()
             markup.add(button1)
-            bot.send_message(message.chat.id, "Для этого перейди в другой чат бот" ,reply_markup=markup)
+            bot.send_message(message.chat.id, "Для этого создан другой чат бот" ,reply_markup=markup)
 
-        if options.get(call.data) =="Personnel administration":
-            button1 = types.InlineKeyboardButton(text="Я оформлен в КЦ", callback_data="1")
-            button2 = types.InlineKeyboardButton(text="Я оформлен в ГПН-С", callback_data="2")
+        if (call.data) =="Personnel administration":
+            button1 = types.InlineKeyboardButton(text="Я оформлен в КЦ", callback_data="KS")
+            button2 = types.InlineKeyboardButton(text="Я оформлен в ГПН-С", callback_data="GPN-S")
             markup = types.InlineKeyboardMarkup()
             markup.add(button1,button2)
             bot.send_message(message.chat.id, 'Выбери отдел:', reply_markup=markup)
 
-        if options.get(call.data) == "Study":
+        if (call.data) == "KS":
+            from functions import KS
+            KS(message.chat.id, bot, types)
+
+        if (call.data) == "Study":
             button1 = types.InlineKeyboardButton(text="1", callback_data="1")
             button2 = types.InlineKeyboardButton(text="2", callback_data="2")
             button3 = types.InlineKeyboardButton(text="3", callback_data="3")
