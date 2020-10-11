@@ -7,12 +7,16 @@ commands = {  # command description used in the "help" command
     'help '        : 'Информация о существующих командах',
     'start '       : 'Знакомство с ботом'
 }
+first_welcome = False
 
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.send_message(message.chat.id, "Привет, " + str(message.from_user.first_name)
+    global first_welcome
+    if (not first_welcome):
+        bot.send_message(message.chat.id, "Привет, " + str(message.from_user.first_name)
                      + ", это твой личный HR друг! Я всегда готов помочь тебе с вопросами")
+        first_welcome = True
     button1 = types.InlineKeyboardButton(text = "1. ☕", callback_data = "coffee")
     button2 = types.InlineKeyboardButton(text = "2. ❓", callback_data = "personnel administration")
     button3 = types.InlineKeyboardButton(text = "3. 🕵️‍♂️ ", callback_data = "study")
@@ -90,5 +94,41 @@ def send_welcome(message):
         if (call.data) == "komandirovkaGPN_S":
             from functions import komandirovkaGPN_S
             komandirovkaGPN_S(message.chat.id, bot, types)
+
+        if (call.data) == "Kakie vozm":
+            from functions import vozmoznosti
+            vozmoznosti(message.chat.id, bot, types)
+
+        if (call.data) == "Samost":
+            from functions import samost
+            samost(message.chat.id, bot, types)
+
+        if (call.data) == "Wanttoteach":
+            from functions import wanttoteach
+            wanttoteach(message.chat.id, bot, types)
+
+        if (call.data) == "Kakponyat":
+            from functions import kakponyat
+            kakponyat(message.chat.id, bot, types)
+
+        if (call.data) == "grow":
+            from functions import grow
+            grow(message.chat.id, bot, types)
+
+        if (call.data) == "Vakansii":
+            from functions import vakansii
+            vakansii(message.chat.id, bot, types)
+
+        if (call.data) == "VnytrPerehod":
+            from functions import vnytr_perehod
+            vnytr_perehod(message.chat.id, bot, types)
+
+        if (call.data) == "OtherRol":
+            from functions import other_rol
+            grow(message.chat.id, bot, types)
+
+        if (call.data) == "IndividPlan":
+            from functions import grow
+            grow(message.chat.id, bot, types)
 
 bot.polling(none_stop=False, interval=0, timeout=20)
