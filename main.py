@@ -8,6 +8,20 @@ commands = {  # command description used in the "help" command
     'start '       : 'Знакомство с ботом'
 }
 
+import os
+from flask import Flask, request
+import logging
+logger = telebot.logger
+telebot.logger.setLevel(logging.INFO)
+server = Flask(__name__)
+os.environ['FLASK_ENV'] = 'development'
+
+@server.route('/' + passwords.key, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -91,4 +105,11 @@ def send_welcome(message):
             from functions import komandirovkaGPN_S
             komandirovkaGPN_S(message.chat.id, bot, types)
 
-bot.polling(none_stop=False, interval=0, timeout=20)
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://telegrambot151.herokuapp.com/' + passwords.key)
+    return "!", 200
+
+
+server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
