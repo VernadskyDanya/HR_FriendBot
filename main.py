@@ -111,9 +111,9 @@ def send_welcome(message):
             from functions import kakponyat
             kakponyat(message.chat.id, bot, types)
 
-        if (call.data) == "grow":
+        if call.data == "grow":
             from functions import grow
-            grow(message.chat.id, bot, types)
+            bot_message = grow(message.chat.id, bot, types)
 
         if (call.data) == "Vakansii":
             from functions import vakansii
@@ -124,11 +124,27 @@ def send_welcome(message):
             vnytr_perehod(message.chat.id, bot, types)
 
         if (call.data) == "OtherRol":
-            from functions import other_rol
+            from functions import grow
             grow(message.chat.id, bot, types)
 
         if (call.data) == "IndividPlan":
-            from functions import grow
-            grow(message.chat.id, bot, types)
+            from functions import individ_plan
+            bot_message
+            bot_message = individ_plan(message.chat.id, bot, types)
+
+        if (call.data) == "GdePlan":
+            bot.delete_message(bot_message.chat.id, bot_message.message_id)
+            from functions import gde_plan
+            gde_plan(message.chat.id, bot, types)
+
+        if (call.data) == "KakPlan":
+            bot.delete_message(bot_message.chat.id, bot_message.message_id)
+            from functions import kak_plan
+            kak_plan(message.chat.id, bot, types)
+
+        if (call.data) == "HelpPlan":
+            bot.delete_message(bot_message.chat.id, bot_message.message_id)
+            from functions import help_plan
+            help_plan(message.chat.id, bot, types)
 
 bot.polling(none_stop=False, interval=0, timeout=20)

@@ -135,7 +135,8 @@ def samost(message_chat_id, bot, types):
 
 
 def wanttoteach(message_chat_id, bot, types):
-    bot.send_message(message_chat_id, 'В компании активно работает <b>кафедра Закупок</b>. Для того, чтобы присоединиться '
+    bot.send_message(message_chat_id, 'В компании активно работает <b>кафедра Закупок</b>. '
+                                      'Для того, чтобы присоединиться '
                                       'к ней - сначала нужно определиться с тем, чему вы могли бы научить коллег. '
                                       'И далее обратиться к Екатерине Копылец',
                                       parse_mode='HTML', reply_markup= menu_button(types))
@@ -187,4 +188,40 @@ def other_rol(message_chat_id, bot, types):
                                       '<b>Карьерном портале</b>: База знаний - Портал обучения - '
                                       'Карьерный портал- определите направление развития и сформируйте '
                                       '<b>индивидуальный план развития</b>',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+def individ_plan(message_chat_id, bot, types):
+    button1 = types.InlineKeyboardButton(text="1.", callback_data="GdePlan")
+    button2 = types.InlineKeyboardButton(text="2.", callback_data="KakPlan")
+    button3 = types.InlineKeyboardButton(text="3.", callback_data="HelpPlan")
+    markup = types.InlineKeyboardMarkup()
+    markup.add(button1, button2, button3)
+    bot_message = bot.send_message(message_chat_id, '1. Где заполнить план развития?\n'
+                                      '2. Как заполнить план развития?\n'
+                                      '3. Мне нужна помощь в составлении плана развития',reply_markup=markup)
+    return bot_message
+
+def gde_plan(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Для создания Индивидуального плана развития (ИПР) на '
+                                      'корпоративном портале есть инструмент: <b>База знаний - '
+                                      'Портал обучения - Карьерный портал - Мое развитие - Мой план развития</b>\n'
+                                      'После заполнения ИПР его согласовывает Руководитель',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+def kak_plan(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Для того, чтобы заполнить план развития максимально качественно, '
+                                      'рекомендуем вам: обратиться за обратной связью от руководителя, '
+                                      'определить свои сильные и слабые строны, <b>сфокусироваться на 2-3 '
+                                      'компетенциях в год</b>\n'
+                                      'В компании действет принцип 70-20-10, который говорит о том, что\n'
+                                      '<b>70%</b> - это обучение в ходе деятельности'
+                                      '<b>20%</b> - социальное обучение, включающее '
+                                      'наставничество и общение с опытными экспертами\n'
+                                      '<b>10%</b> - формальное обучение (тренинги и обучающие '
+                                      'программы Корпоративного университета и внешних провайдеров)',                                       parse_mode='HTML', reply_markup= menu_button(types))
+
+def help_plan(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Если вам нужна помощь или консультация в составлении ИПР, '
+                                      'пожалуйста, обратитесь к своему HR - партнеру. Данный '
+                                      'запрос останется конфиденциальным',
                                       parse_mode='HTML', reply_markup= menu_button(types))
