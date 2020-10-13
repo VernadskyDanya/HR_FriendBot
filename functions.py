@@ -18,31 +18,35 @@ def coffee(message_chat_id, bot, types):
 
 
 def pers_adm(message_chat_id, bot, types):
-    button1 = types.InlineKeyboardButton(text="Я оформлен в КЦ", callback_data="KS")
-    button2 = types.InlineKeyboardButton(text="Я оформлен в ГПН-С", callback_data="GPN-S")
+    button1 = types.InlineKeyboardButton(text="в КЦ", callback_data="KS")
+    button2 = types.InlineKeyboardButton(text="в ГПН-С", callback_data="GPN-S")
     markup = types.InlineKeyboardMarkup()
     markup.add(button1, button2)
-    bot_message = bot.send_message(message_chat_id, 'Выбери отдел:', reply_markup= markup)
+    button3 = types.InlineKeyboardButton(text="Назад", callback_data="start")
+    markup.row(button3)
+    bot_message = bot.send_message(message_chat_id, 'Я оформлен:', reply_markup= markup)
     return bot_message
 
 
 def KSorGPN_S(message_chat_id, bot, types, KSorGPN_Sbool):
     if not KSorGPN_Sbool:
-        button1 = types.InlineKeyboardButton(text="1.", callback_data="perenosKS")
-        button2 = types.InlineKeyboardButton(text="2.", callback_data="spravkaKS")
-        button3 = types.InlineKeyboardButton(text="3.", callback_data="bolnichnyiKS")
-        button4 = types.InlineKeyboardButton(text="4.", callback_data="komandirovkaKS")
+        button1 = types.InlineKeyboardButton(text="Как перенести/отменить отпуск?", callback_data="perenosKS")
+        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ, о месте работы и др.)?", callback_data="spravkaKS")
+        button3 = types.InlineKeyboardButton(text="Как передать больничный в кадры?", callback_data="bolnichnyiKS")
+        button4 = types.InlineKeyboardButton(text="Как оформить командировку?", callback_data="komandirovkaKS")
     else:
-        button1 = types.InlineKeyboardButton(text="1.", callback_data="perenosGPN_S")
-        button2 = types.InlineKeyboardButton(text="2.", callback_data="spravkaGPN_S")
-        button3 = types.InlineKeyboardButton(text="3.", callback_data="bolnichnyiGPN_S")
-        button4 = types.InlineKeyboardButton(text="4.", callback_data="komandirovkaGPN_S")
+        button1 = types.InlineKeyboardButton(text="Как перенести/отменить отпуск?", callback_data="perenosGPN_S")
+        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ, о месте работы и др.)?", callback_data="spravkaGPN_S")
+        button3 = types.InlineKeyboardButton(text="Как передать больничный в кадры?", callback_data="bolnichnyiGPN_S")
+        button4 = types.InlineKeyboardButton(text="Как оформить командировку?", callback_data="komandirovkaGPN_S")
+    button5 = types.InlineKeyboardButton(text="Назад", callback_data="personnel administration")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1, button2, button3, button4)
-    bot.send_message(message_chat_id, "1. Как перенести/отменить отпуск?\n"
-                                      "2. Как заказать справку (2НДФЛ, о месте работы и др.)?\n"
-                                      "3. Как передать больничный в кадры?\n"
-                                      "4. Как оформить командировку?\n", reply_markup=markup)
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    markup.row(button5)
+    bot.send_message(message_chat_id, "Выбери вопрос:", reply_markup=markup)
 
 
 def perenosKS(message_chat_id, bot, types):
@@ -104,16 +108,18 @@ def komandirovkaGPN_S(message_chat_id, bot, types):
 """
 
 def study(message_chat_id,bot,types):
-    button1 = types.InlineKeyboardButton(text="1.", callback_data="Kakie vozm")
-    button2 = types.InlineKeyboardButton(text="2.", callback_data="Samost")
-    button3 = types.InlineKeyboardButton(text="3.", callback_data="Wanttoteach")
-    button4 = types.InlineKeyboardButton(text="4.", callback_data ="Kakponyat")
+    button1 = types.InlineKeyboardButton(text="Какие возможности для обучения есть в компании?", callback_data="Kakie vozm")
+    button2 = types.InlineKeyboardButton(text="Я самостоятельно выбрал курс - что дальше?", callback_data="Samost")
+    button3 = types.InlineKeyboardButton(text="Хочу учить других!", callback_data="Wanttoteach")
+    button4 = types.InlineKeyboardButton(text="Как понять, чему мне поучиться?", callback_data ="Kakponyat")
+    button5 = types.InlineKeyboardButton(text="Назад", callback_data="start")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1, button2, button3, button4)
-    bot.send_message(message_chat_id, '1. Какие возможности для обучения есть в компании?\n'
-                                      '2. Я самостоятельно выбрал курс - что дальше?\n'
-                                      '3. Хочу учить других!\n'
-                                      '4. Как понять, чему мне поучиться?\n', reply_markup=markup)
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    markup.row(button5)
+    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
 
 def vozmoznosti(message_chat_id, bot, types):
     bot.send_message(message_chat_id, 'Через портал компании (<b>База знаний - Портал обучения</b>) '
@@ -156,17 +162,19 @@ def kakponyat(message_chat_id, bot, types):
 """
 
 def grow(message_chat_id,bot,types):
-    button1 = types.InlineKeyboardButton(text="1.", callback_data="Vakansii")
-    button2 = types.InlineKeyboardButton(text="2.", callback_data="VnytrPerehod")
-    button3 = types.InlineKeyboardButton(text="3.", callback_data="OtherRol")
-    button4 = types.InlineKeyboardButton(text="4.", callback_data ="IndividPlan")
+    button1 = types.InlineKeyboardButton(text="Где увидеть вакансии компании?", callback_data="Vakansii")
+    button2 = types.InlineKeyboardButton(text="Какие правила внутреннего перехода?", callback_data="VnytrPerehod")
+    button3 = types.InlineKeyboardButton(text="Что необходимо сделать, чтобы перейти на другую роль "
+                                              "или в смежное направление?", callback_data="OtherRol")
+    button4 = types.InlineKeyboardButton(text="Как выстроить индивидуальный план развития?", callback_data ="IndividPlan")
+    button5 = types.InlineKeyboardButton(text="Назад", callback_data="start")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1, button2, button3, button4)
-    bot.send_message(message_chat_id, '1. Где увидеть вакансии компании?\n'
-                                      '2. Какие правила внутреннего перехода?\n'
-                                      '3. Что необходимо сделать, чтобы перейти на другую роль'
-                                      ' или в смежное направление?\n'
-                                      '4. Как выстроить индивидуальный план развития?\n', reply_markup=markup)
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    markup.row(button5)
+    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
 
 
 def vakansii(message_chat_id, bot, types):
@@ -192,14 +200,16 @@ def other_rol(message_chat_id, bot, types):
                                       parse_mode='HTML', reply_markup= menu_button(types))
 
 def individ_plan(message_chat_id, bot, types):
-    button1 = types.InlineKeyboardButton(text="1.", callback_data="GdePlan")
-    button2 = types.InlineKeyboardButton(text="2.", callback_data="KakPlan")
-    button3 = types.InlineKeyboardButton(text="3.", callback_data="HelpPlan")
+    button1 = types.InlineKeyboardButton(text="Где заполнить план развития?", callback_data="GdePlan")
+    button2 = types.InlineKeyboardButton(text="Как заполнить план развития?", callback_data="KakPlan")
+    button3 = types.InlineKeyboardButton(text="Помощь в составлении плана развития", callback_data="HelpPlan")
+    button4 = types.InlineKeyboardButton(text="Назад", callback_data="grow")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1, button2, button3)
-    bot_message = bot.send_message(message_chat_id, '1. Где заполнить план развития?\n'
-                                      '2. Как заполнить план развития?\n'
-                                      '3. Мне нужна помощь в составлении плана развития',reply_markup=markup)
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    bot_message = bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
     return bot_message
 
 def gde_plan(message_chat_id, bot, types):
@@ -225,4 +235,88 @@ def help_plan(message_chat_id, bot, types):
     bot.send_message(message_chat_id, 'Если вам нужна помощь или консультация в составлении ИПР, '
                                       'пожалуйста, обратитесь к своему HR - партнеру. Данный '
                                       'запрос останется конфиденциальным',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+""" 
+Раздел "У меня вопрос по административной или ИТ поддержке" 
+"""
+
+
+def it(message_chat_id,bot,types):
+    button1 = types.InlineKeyboardButton(text="Как заказать разовый пропуск посетителю?", callback_data="RazProp")
+    button2 = types.InlineKeyboardButton(text="Как заказать временный пропуск?", callback_data="VremProp")
+    button3 = types.InlineKeyboardButton(text="Как отправить документы в другой офис?", callback_data="DocOffice")
+    button4 = types.InlineKeyboardButton(text="У меня вопрос по ИТ - куда обратиться?", callback_data="questIT")
+    button5 = types.InlineKeyboardButton(text="Как заказать канцелярию?", callback_data ="Kanzel")
+    button6 = types.InlineKeyboardButton(text="У меня другой вопрос", callback_data="OthQuest")
+    button7 = types.InlineKeyboardButton(text="Назад", callback_data="start")
+    markup = types.InlineKeyboardMarkup()
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    markup.row(button5)
+    markup.row(button6)
+    markup.row(button7)
+    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
+
+
+def raz_prop(message_chat_id, bot, types):
+    button1 = types.InlineKeyboardButton(text="Посетитель внешний (из другой компании, "
+                                              "физическое лицо)", callback_data="VneshPos")
+    button2 = types.InlineKeyboardButton(text="Посетитель из другого ДО", callback_data="VnytrPos")
+    button3 = types.InlineKeyboardButton(text="Назад", callback_data="IT")
+    markup = types.InlineKeyboardMarkup()
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    bot_message = bot.send_message(message_chat_id, 'Выбери категорию:', reply_markup=markup)
+    #return bot_message
+
+
+def vnesh_pos(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'В период COVID у посетителя должен быть на руках свежий (не более 7 дней) '
+                                      'отрицательный тест. Заявку на пропуск необходимо согласовать с Барминым М.В.\n'
+                                      'Также вы можете попросить помочь помощника вашего подразделения',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def vnytr_pos(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'У посетителя должен быть "зеленый" статус в градуснике. '
+                                      'Заявку на пропуск необходимо согласовать с Барминым М.В.\n'
+                                      'Также вы можете попросить помочь помощника вашего подразделения',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def vrem_prop(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Необходимо оформленную по форме заявку направить на согласование Бармину М.В. '
+                                      'Вход в офис возможет только при наличии приложения Градусник '
+                                      'и "зеленого" статуса в нем',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def doc_office(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Через ячейку "Исходящая почта" на 1 этаже, с указанием адреса и получателя',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def quest_it(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'По всем вопросам вы можете '
+                                      'позвонить или написать на 8888 (телефон и адрес почты совпадает)',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def kanzel(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Заявка на канцелярию формируется помощником подразделения. '
+                                      'Если вам нужны какие-то определенные вещи, сообщите помощнику.',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+def oth_quest(message_chat_id, bot, types):
+    bot.send_message(message_chat_id, 'Пожалуйста, обратитесь к помощнику своего подразделения',
+                                      parse_mode='HTML', reply_markup= menu_button(types))
+
+
+def not_found(message_chat_id, bot, types):
+    button4 = types.InlineKeyboardButton(text="Назад", callback_data="grow")
+    bot.send_message(message_chat_id, 'Пожалуйста, обратитесь к своему HR-партнеру',
                                       parse_mode='HTML', reply_markup= menu_button(types))

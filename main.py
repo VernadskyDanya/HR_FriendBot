@@ -17,12 +17,12 @@ def send_welcome(message):
         bot.send_message(message.chat.id, "Привет, " + str(message.from_user.first_name)
                      + ", это твой личный HR друг! Я всегда готов помочь тебе с вопросами")
         first_welcome = True
-    button1 = types.InlineKeyboardButton(text = "Хочу выпить кофе с коллегой ☕", callback_data = "coffee")
-    button2 = types.InlineKeyboardButton(text = "У меня вопрос по кадровому администрированию ❓", callback_data = "personnel administration")
-    button3 = types.InlineKeyboardButton(text = "Хочу учиться/развиваться 🕵️‍♂️ ", callback_data = "study")
-    button4 = types.InlineKeyboardButton(text = "Хочу расти и/или перемещаться в компании 📈 ", callback_data = "grow")
-    button5 = types.InlineKeyboardButton(text = "У меня вопрос по административной или ИТ поддержке 📴 ", callback_data = "IT")
-    button6 = types.InlineKeyboardButton(text = "Я не нашел ответа на свой вопрос 📛", callback_data = "not found")
+    button1 = types.InlineKeyboardButton(text = "☕ Хочу выпить кофе с коллегой", callback_data = "coffee")
+    button2 = types.InlineKeyboardButton(text = "❓ У меня вопрос по кадровому администрированию", callback_data = "personnel administration")
+    button3 = types.InlineKeyboardButton(text = "♂️  Хочу учиться/развиваться", callback_data = "study")
+    button4 = types.InlineKeyboardButton(text = "📈  Хочу расти и/или перемещаться в компании", callback_data = "grow")
+    button5 = types.InlineKeyboardButton(text = "📴  У меня вопрос по административной или ИТ поддержке", callback_data = "IT")
+    button6 = types.InlineKeyboardButton(text = "📛 Я не нашел ответа на свой вопрос" , callback_data = "not found")
     markup = types.InlineKeyboardMarkup()
     markup.row(button1)
     markup.row(button2)
@@ -145,5 +145,45 @@ def send_welcome(message):
             bot.delete_message(bot_message.chat.id, bot_message.message_id)
             from functions import help_plan
             help_plan(message.chat.id, bot, types)
+
+        if call.data =="IT":
+            from functions import it
+            it(message.chat.id, bot, types)
+
+        if call.data =="RazProp":
+            from functions import raz_prop
+            raz_prop(message.chat.id, bot, types)
+
+        if call.data =="VneshPos":
+            from functions import vnesh_pos
+            vnesh_pos(message.chat.id, bot, types)
+
+        if call.data =="VnytrPos":
+            from functions import vnytr_pos
+            vnytr_pos(message.chat.id, bot, types)
+
+        if call.data =="VremProp":
+            from functions import vrem_prop
+            vrem_prop(message.chat.id, bot, types)
+
+        if call.data =="DocOffice":
+            from functions import doc_office
+            doc_office(message.chat.id, bot, types)
+
+        if call.data =="questIT":
+            from functions import quest_it
+            quest_it(message.chat.id, bot, types)
+
+        if call.data =="Kanzel":
+            from functions import kanzel
+            kanzel(message.chat.id, bot, types)
+
+        if call.data =="OthQuest":
+            from functions import oth_quest
+            oth_quest(message.chat.id, bot, types)
+
+        if call.data =="not found":
+            from functions import not_found
+            not_found(message.chat.id, bot, types)
 
 bot.polling(none_stop=False, interval=0, timeout=20)
