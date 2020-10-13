@@ -11,9 +11,10 @@ def menu_button(types):
 def coffee(message_chat_id, bot, types):
     button1 = types.InlineKeyboardButton(text="Бот Hot Coffee ☕ ",
                                          url="https://t.me/GPN_S_coffee_bot")
+    button2 = types.InlineKeyboardButton(text="❔ Задать новый вопрос", callback_data="start")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1)
-    bot.send_message(message_chat_id, "Для этого создан другой чат бот", reply_markup= menu_button(types))
+    markup.add(button1, button2)
+    bot.send_message(message_chat_id, "Для этого нажми кнопку Hot Coffee", reply_markup=markup)
 
 
 def pers_adm(message_chat_id, bot, types):

@@ -17,21 +17,20 @@ def send_welcome(message):
         bot.send_message(message.chat.id, "Привет, " + str(message.from_user.first_name)
                      + ", это твой личный HR друг! Я всегда готов помочь тебе с вопросами")
         first_welcome = True
-    button1 = types.InlineKeyboardButton(text = "1. ☕", callback_data = "coffee")
-    button2 = types.InlineKeyboardButton(text = "2. ❓", callback_data = "personnel administration")
-    button3 = types.InlineKeyboardButton(text = "3. 🕵️‍♂️ ", callback_data = "study")
-    button4 = types.InlineKeyboardButton(text = "4. 📈 ", callback_data = "grow")
-    button5 = types.InlineKeyboardButton(text = "5. 📴 ", callback_data = "IT")
-    button6 = types.InlineKeyboardButton(text = "6. 📛", callback_data = "not found")
+    button1 = types.InlineKeyboardButton(text = "Хочу выпить кофе с коллегой ☕", callback_data = "coffee")
+    button2 = types.InlineKeyboardButton(text = "У меня вопрос по кадровому администрированию ❓", callback_data = "personnel administration")
+    button3 = types.InlineKeyboardButton(text = "Хочу учиться/развиваться 🕵️‍♂️ ", callback_data = "study")
+    button4 = types.InlineKeyboardButton(text = "Хочу расти и/или перемещаться в компании 📈 ", callback_data = "grow")
+    button5 = types.InlineKeyboardButton(text = "У меня вопрос по административной или ИТ поддержке 📴 ", callback_data = "IT")
+    button6 = types.InlineKeyboardButton(text = "Я не нашел ответа на свой вопрос 📛", callback_data = "not found")
     markup = types.InlineKeyboardMarkup()
-    markup.add(button1, button2, button3, button4, button5, button6)
-    bot.send_message(message.chat.id, "Чем тебе помочь?\n"
-                                      "1. Хочу выпить кофе с коллегой ☕\n"
-                                      "2. У меня вопрос по кадровому администрированию ❓\n"
-                                      "3. Хочу учиться/развиваться 🕵️‍♂️ \n"
-                                      "4. Хочу расти и/или перемещаться в компании 📈 \n"
-                                      "5. У меня вопрос по административной или ИТ поддержке 📴 \n"
-                                      "6. Я не нашел ответа на свой вопрос 📛\n", reply_markup=markup)
+    markup.row(button1)
+    markup.row(button2)
+    markup.row(button3)
+    markup.row(button4)
+    markup.row(button5)
+    markup.row(button6)
+    bot.send_message(message.chat.id, "Чем тебе помочь?\n", reply_markup=markup)
 
     bot_message = 5  # Переменная для удаления предыдущих сообщений
 
