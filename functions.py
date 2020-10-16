@@ -19,18 +19,21 @@ def coffee(message_chat_id, bot, types):
     bot.send_message(message_chat_id, "Для этого нажми кнопку Hot Coffee", reply_markup=markup)
 
 def hr_question(message_chat_id, bot, types):
-    button1 = types.InlineKeyboardButton(text="❓ Вопрос по кадровому администрированию",
+    button1 = types.InlineKeyboardButton(text="❓ Кадровое администрирование",
                                          callback_data = "personnel administration")
-    button2 = types.InlineKeyboardButton(text = "🕵️‍♂️Хочу учиться/развиваться", callback_data = "study")
-    button3 = types.InlineKeyboardButton(text = "📈  Хочу расти/перемещаться в компании",
+    button2 = types.InlineKeyboardButton(text = "🕵️‍♂️Учеба/развитие", callback_data = "study")
+    button3 = types.InlineKeyboardButton(text = "📈  Рост/перемещение в компании",
                                          callback_data = "grow")
-    button4 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="start")
+    button4 = types.InlineKeyboardButton(text="📛 Не нашел ответа на свой вопрос", callback_data="not found")
+    button5 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="start")
+    types.InlineKeyboardMarkup()
     markup = types.InlineKeyboardMarkup()
     markup.row(button1)
     markup.row(button2)
     markup.row(button3)
     markup.row(button4)
-    bot.send_message(message_chat_id, "Выбери вопрос:", reply_markup=markup)
+    markup.row(button5)
+    bot.send_message(message_chat_id, "Выбери вопрос по HR:", reply_markup=markup)
 
 
 def pers_adm(message_chat_id, bot, types):
@@ -48,12 +51,12 @@ def pers_adm(message_chat_id, bot, types):
 def KSorGPN_S(message_chat_id, bot, types, KSorGPN_Sbool):
     if not KSorGPN_Sbool:
         button1 = types.InlineKeyboardButton(text="Как перенести/отменить отпуск?", callback_data="perenosKS")
-        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ, о месте работы и др.)?", callback_data="spravkaKS")
+        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ и др.)?", callback_data="spravkaKS")
         button3 = types.InlineKeyboardButton(text="Как передать больничный в кадры?", callback_data="bolnichnyiKS")
         button4 = types.InlineKeyboardButton(text="Как оформить командировку?", callback_data="komandirovkaKS")
     else:
         button1 = types.InlineKeyboardButton(text="Как перенести/отменить отпуск?", callback_data="perenosGPN_S")
-        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ, о месте работы и др.)?", callback_data="spravkaGPN_S")
+        button2 = types.InlineKeyboardButton(text="Как заказать справку (2НДФЛ и др.)?", callback_data="spravkaGPN_S")
         button3 = types.InlineKeyboardButton(text="Как передать больничный в кадры?", callback_data="bolnichnyiGPN_S")
         button4 = types.InlineKeyboardButton(text="Как оформить командировку?", callback_data="komandirovkaGPN_S")
     button5 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="personnel administration")
@@ -64,7 +67,7 @@ def KSorGPN_S(message_chat_id, bot, types, KSorGPN_Sbool):
     markup.row(button3)
     markup.row(button4)
     markup.add(button5, button6)
-    bot.send_message(message_chat_id, "Выбери вопрос:", reply_markup=markup)
+    bot.send_message(message_chat_id, "Выбери вопрос по кадровому администрированию", reply_markup=markup)
 
 
 def perenosKS(message_chat_id, bot, types):
@@ -123,7 +126,7 @@ def spravkaGPN_S(message_chat_id, bot, types):
     button4 = types.InlineKeyboardButton(text="🏠 Начало", callback_data="start")
     back.add(button4)
     bot.send_message(message_chat_id, 'Вам необходимо направить запрос на справку кадровым '
-                                      'администраторам ООО "Газпромнеть Снабжения"', parse_mode='HTML',
+                                      'администраторам ООО "Газпромнефть Снабжения"', parse_mode='HTML',
                                       reply_markup= back)
 
 
@@ -150,8 +153,8 @@ def komandirovkaGPN_S(message_chat_id, bot, types):
 """
 
 def study(message_chat_id,bot,types):
-    button1 = types.InlineKeyboardButton(text="Какие возможности для обучения есть в компании?", callback_data="Kakie vozm")
-    button2 = types.InlineKeyboardButton(text="Я самостоятельно выбрал курс - что дальше?", callback_data="Samost")
+    button1 = types.InlineKeyboardButton(text="Возможности для обучения в компании", callback_data="Kakie vozm")
+    button2 = types.InlineKeyboardButton(text="Я выбрал курс - что дальше?", callback_data="Samost")
     button3 = types.InlineKeyboardButton(text="Хочу учить других!", callback_data="Wanttoteach")
     button4 = types.InlineKeyboardButton(text="Как понять, чему мне поучиться?", callback_data ="Kakponyat")
     button5 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="HRquestion")
@@ -177,7 +180,7 @@ def vozmoznosti(message_chat_id, bot, types):
                                       'назначения, пользуйтесь этой возможностью!</b> Если вы выбрали на '
                                       'Портале обучения или во внешних ресурсах платный курс, согласуйте '
                                       'необходимость и возможность данного обучения с руководителем и '
-                                      'HR-партнером.\nВы также можете проконсультироваться с вашим HR-партнером"',
+                                      'HR-партнером.\nВы также можете проконсультироваться с вашим HR-партнером',
                                       parse_mode='HTML', reply_markup= back)
 
 
@@ -219,9 +222,8 @@ def kakponyat(message_chat_id, bot, types):
 def grow(message_chat_id,bot,types):
     button1 = types.InlineKeyboardButton(text="Где увидеть вакансии компании?", callback_data="Vakansii")
     button2 = types.InlineKeyboardButton(text="Какие правила внутреннего перехода?", callback_data="VnytrPerehod")
-    button3 = types.InlineKeyboardButton(text="Что необходимо сделать, чтобы перейти на другую роль "
-                                              "или в смежное направление?", callback_data="OtherRol")
-    button4 = types.InlineKeyboardButton(text="Как выстроить индивидуальный план развития?", callback_data ="IndividPlan")
+    button3 = types.InlineKeyboardButton(text="Переход на другую роль/направление?", callback_data="OtherRol")
+    button4 = types.InlineKeyboardButton(text="Построение инд. плана развития?", callback_data ="IndividPlan")
     button5 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="HRquestion")
     button6 = types.InlineKeyboardButton(text="🏠 Начало", callback_data="start")
     markup = types.InlineKeyboardMarkup()
@@ -240,7 +242,7 @@ def vakansii(message_chat_id, bot, types):
     bot.send_message(message_chat_id, 'Вакансии компании представлены на портале в разделе '
                                       '<b>Персонал - Вакансии.</b>\n'
                                       'Обязательно ознакомьтесь с <b>правилами внутреннего перехода</b> '
-                                      'перед тем, как откливаться на позицию',
+                                      'перед тем, как откликаться на позицию',
                                       parse_mode='HTML', reply_markup= back)
 
 def vnytr_perehod(message_chat_id, bot, types):
@@ -297,7 +299,7 @@ def kak_plan(message_chat_id, bot, types):
                                       'определить свои сильные и слабые строны, <b>сфокусироваться на 2-3 '
                                       'компетенциях в год</b>\n'
                                       'В компании действет принцип 70-20-10, который говорит о том, что\n'
-                                      '<b>70%</b> - это обучение в ходе деятельности'
+                                      '<b>70%</b> - это обучение в ходе деятельности\n'
                                       '<b>20%</b> - социальное обучение, включающее '
                                       'наставничество и общение с опытными экспертами\n'
                                       '<b>10%</b> - формальное обучение (тренинги и обучающие '
@@ -338,8 +340,7 @@ def it(message_chat_id,bot,types):
 
 
 def raz_prop(message_chat_id, bot, types):
-    button1 = types.InlineKeyboardButton(text="Посетитель внешний (из другой компании, "
-                                              "физическое лицо)", callback_data="VneshPos")
+    button1 = types.InlineKeyboardButton(text="Посетитель из другой компании", callback_data="VneshPos")
     button2 = types.InlineKeyboardButton(text="Посетитель из другого ДО", callback_data="VnytrPos")
     button3 = types.InlineKeyboardButton(text="🔙 Назад", callback_data="IT")
     button4 = types.InlineKeyboardButton(text="🏠 Начало", callback_data="start")
@@ -418,3 +419,4 @@ def not_found(message_chat_id, bot, types):
     back = button_back("start")
     bot.send_message(message_chat_id, 'Пожалуйста, обратитесь к своему HR-партнеру',
                                       parse_mode='HTML', reply_markup= back)
+    #dsa
