@@ -165,7 +165,7 @@ def study(message_chat_id,bot,types):
     markup.row(button3)
     markup.row(button4)
     markup.add(button5, button6)
-    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
+    bot.send_message(message_chat_id, 'Выбери вопрос по учёбе/развитию:', reply_markup=markup)
 
 def vozmoznosti(message_chat_id, bot, types):
     back = button_back("study")
@@ -232,7 +232,7 @@ def grow(message_chat_id,bot,types):
     markup.row(button3)
     markup.row(button4)
     markup.add(button5, button6)
-    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
+    bot.send_message(message_chat_id, 'Выбери вопрос по росту и/или перемещению в компании:', reply_markup=markup)
 
 
 def vakansii(message_chat_id, bot, types):
@@ -277,7 +277,9 @@ def individ_plan(message_chat_id, bot, types):
     markup.row(button2)
     markup.row(button3)
     markup.add(button4, button5)
-    bot_message = bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
+    bot_message = bot.send_message(message_chat_id, 'Выбери вопрос по построению индивидуального '
+                                                    'плана развития:', reply_markup=markup)
+
     return bot_message
 
 def gde_plan(message_chat_id, bot, types):
@@ -336,7 +338,7 @@ def it(message_chat_id,bot,types):
     markup.row(button5)
     markup.row(button6)
     markup.row(button7)
-    bot.send_message(message_chat_id, 'Выбери вопрос:', reply_markup=markup)
+    bot.send_message(message_chat_id, 'Выбери вопрос по административной или ИТ поддержке:', reply_markup=markup)
 
 
 def raz_prop(message_chat_id, bot, types):

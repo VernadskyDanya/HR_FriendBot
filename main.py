@@ -12,7 +12,6 @@ def start(message_chat_id):
     button1 = types.InlineKeyboardButton(text="☕ Хочу выпить кофе с коллегой", callback_data="coffee")
     button2 = types.InlineKeyboardButton(text="📖 У меня вопрос по HR", callback_data="HRquestion")
     button3 = types.InlineKeyboardButton(text="📴  Вопрос по админ. или ИТ поддержке", callback_data="IT")
-    # button4 = types.InlineKeyboardButton(text = "📛 Я не нашел ответа на свой вопрос" , callback_data = "not found")
     markup = types.InlineKeyboardMarkup()
     markup.row(button1)
     markup.row(button2)
@@ -27,10 +26,12 @@ def send_welcome(message):
                    "Ты всегда можешь вернуться в меню командой /start")
     start(message.chat.id)
 
-    bot_message = 0  # Переменная для удаления предыдущих сообщений
+
+bot_message = 0  # Переменная для удаления предыдущих сообщений
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
+    global bot_message
     if call.data == "start":
         start(call.message.chat.id)
 
